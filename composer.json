@@ -1,0 +1,21 @@
+{
+    "name": "stee1cat/yii2-file-attachment",
+    "description": "Extension for file uploading and attaching to the models",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","file","attachment"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gennadiy Khatuntsev",
+            "email": "e.steelcat@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "stee1cat\\FileAttachment\\": "src"
+        }
+    }
+}

@@ -5,6 +5,7 @@ namespace stee1cat\FileAttachment;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%files}}".
@@ -21,6 +22,7 @@ use yii\db\ActiveRecord;
  * @property integer $size
  *
  * @property string $filename
+ * @property string $url
  */
 class File extends ActiveRecord
 {
@@ -78,9 +80,20 @@ class File extends ActiveRecord
         ];
     }
 
+    /**
+     * @return string
+     */
     public function getFilename()
     {
         return $this->name . '.' . $this->extension;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return Url::to($this->path, true);
     }
 
     /**

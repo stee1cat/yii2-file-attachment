@@ -31,7 +31,6 @@ class FileBehavior extends Behavior
      */
     public $attribute = 'file_id';
 
-
     /**
      * Директория загрузки
      *
@@ -58,6 +57,13 @@ class FileBehavior extends Behavior
      */
     private $items = [];
 
+    /**
+     * Запрещает загрузку
+     *
+     * @var bool
+     */
+    private $disable = false;
+
     public function events()
     {
         return [
@@ -71,13 +77,13 @@ class FileBehavior extends Behavior
     {
         $result = true;
         $files = [UploadedFile::getInstance($this->owner, 'upload')];
-        if ($files) {
+        if ($files && !$this->disable) {
             $this->beginTransaction();
             // Сохраняем изображения
             $result = $result && $this->move($files);
             $this->endTransaction($result);
         }
-        return $files && $result;
+        return !$this->disable && $files && $result;
     }
 
     public function updateFile()
@@ -100,6 +106,16 @@ class FileBehavior extends Behavior
     public function getFile()
     {
         return $this->owner->hasOne(File::className(), ['id' => $this->attribute]);
+    }
+
+    /**
+     * Запрещает загрузку
+     *
+     * @param bool|true $disable
+     */
+    public function disableAttachment($disable = true)
+    {
+        $this->disable = $disable;
     }
 
     /**

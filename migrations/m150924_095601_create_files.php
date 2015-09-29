@@ -20,7 +20,7 @@ class m150924_095601_create_files extends Migration
             'path' => $this->string(1024)->notNull() . " COMMENT 'Путь'",
             'hash' => $this->string(32)->notNull() . " COMMENT 'Хеш'",
             'description' => $this->string(255)->defaultValue('') . " COMMENT 'Описание'",
-        ]);
+        ] , "CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB COMMENT='Files'");
         $this->createIndex('hash_idx', $this->tableName, 'hash', true);
     }
 
